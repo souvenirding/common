@@ -17,7 +17,8 @@
 
 package com.indiev.redis.cache;
 
-import com.indiev.redis.utils.RedisUtil;
+import com.indiev.redis.utils.ObjectUtil;
+import com.indiev.redis.utils.StringUtil;
 import org.springframework.lang.Nullable;
 
 import java.time.Duration;
@@ -56,10 +57,10 @@ public interface ICacheKey {
 		String prefix = this.getPrefix();
 		// 拼接参数
 		String key;
-		if (RedisUtil.isEmpty(suffix)) {
+		if (ObjectUtil.isEmpty(suffix)) {
 			key = prefix;
 		} else {
-			key = prefix.concat(RedisUtil.join(suffix, ":"));
+			key = prefix.concat(StringUtil.join(suffix, ":"));
 		}
 		Duration expire = this.getExpire();
 		return expire == null ? new CacheKey(key) : new CacheKey(key, expire);

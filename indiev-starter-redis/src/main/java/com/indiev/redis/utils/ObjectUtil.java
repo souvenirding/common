@@ -18,6 +18,9 @@ package com.indiev.redis.utils;
 
 import org.springframework.lang.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 对象工具类
  *
@@ -34,4 +37,17 @@ public class ObjectUtil extends org.springframework.util.ObjectUtils {
 		return !ObjectUtil.isEmpty(obj);
 	}
 
+	public static <K, V> Map<K, V> toMap(Object... keysValues) {
+		int kvLength = keysValues.length;
+		if (kvLength % 2 != 0) {
+			throw new IllegalArgumentException("wrong number of arguments for met, keysValues length can not be odd");
+		}
+		Map<K, V> keyValueMap = new HashMap<>(kvLength);
+		for (int i = kvLength - 2; i >= 0; i -= 2) {
+			Object key = keysValues[i];
+			Object value = keysValues[i + 1];
+			keyValueMap.put((K) key, (V) value);
+		}
+		return keyValueMap;
+	}
 }

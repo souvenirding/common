@@ -17,7 +17,7 @@
 
 package com.indiev.redis.cache;
 
-import com.indiev.redis.utils.RedisUtil;
+import com.indiev.redis.utils.ObjectUtil;
 import lombok.Getter;
 import org.springframework.data.redis.core.*;
 import org.springframework.lang.Nullable;
@@ -211,7 +211,7 @@ public class IndievRedis {
 	 * </pre>
 	 */
 	public void mSet(Object... keysValues) {
-		valueOps.multiSet(RedisUtil.toMap(keysValues));
+		valueOps.multiSet(ObjectUtil.toMap(keysValues));
 	}
 
 	/**
